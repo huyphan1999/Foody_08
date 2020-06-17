@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="#e6e6e6"
+    tools:context=".LoginWifiActivity">
+    <EditText
+        android:drawableLeft="@drawable/wifi"
+        android:id="@+id/edtNameWifi"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_round_connect_wifi"
+        android:textSize="18sp"
+        android:padding="8dp"
+        android:drawablePadding="8dp"
+        android:hint="Tên wifi show sẵn nếu đã kết nối"
+        />
+    <EditText
+        android:drawablePadding="8dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/edtPassWifi"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_round_connect_wifi"
+        android:textSize="18sp"
+        android:padding="8dp"
+        android:drawableLeft="@drawable/password"
+
+        android:hint="Nhập mật khẩu"
+        android:layout_below="@id/edtNameWifi"
+
+        />
+    <Button
+        android:layout_marginTop="60dp"
+        android:id="@+id/btnSubWifi"
+        android:layout_width="320dp"
+        android:backgroundTint="#3366ff"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_round_connect_wifi"
+        android:textSize="18sp"
+        android:padding="8dp"
+        android:hint="Cập Nhật Wifi Password"
+        android:layout_below="@id/edtPassWifi"
+
+        />
+
+</RelativeLayout>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="120dp"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    cardview:cardCornerRadius="10dp">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="130dp"
+        android:background="@color/cardview_light_background"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/thumbnail"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/txtTenQuan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ten Quan"
+                android:textSize="20sp"
+                android:textColor="#2d2d2d"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtKhoangCach"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtTenQuan"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="10dp"
+                android:text="Khoảng cách"
+                android:textColor="#DDDDDD"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtDiaChi"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtTenQuan"
+                android:text="Địa chỉ"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="#787878"
+                android:layout_marginTop="10dp"
+                android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/txtTheLoai"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thể loại"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/txtDiaChi"
+                android:textSize="18sp"/>
+
+            //android:textColor="#2d2d2d"
+            android:textSize="18sp"/>
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

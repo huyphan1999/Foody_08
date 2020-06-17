@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:id="@+id/search_home"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#FF0000">
+
+        <SearchView
+            android:id="@+id/search"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginVertical="20dp"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/edit_round"
+            android:iconifiedByDefault="false"
+            android:paddingLeft="10dp"
+            android:queryHint="Tìm địa điểm,món ăn,địa chỉ..">
+
+            <requestFocus />
+
+        </SearchView>
+
+        <Button
+            android:layout_marginRight="15dp"
+            android:id="@+id/btn_City"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginVertical="20dp"
+            android:layout_toRightOf="@id/search"
+            android:background="@drawable/button_search"
+            android:text="TP. Nha Trang"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+
+        android:id="@+id/recyclerview_id"
+        android:layout_marginTop="10dp"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/search"
+        />
+
+</LinearLayout>

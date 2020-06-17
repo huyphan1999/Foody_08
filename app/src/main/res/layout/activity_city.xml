@@ -1,0 +1,56 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#ff3333"
+        android:paddingTop="15dp"
+        >
+            <TextView
+                android:textColor="#ffffff"
+                android:paddingRight="30dp"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Hủy"/>
+            <TextView
+                android:textColor="#ffffff"
+                android:paddingLeft="32dp"
+                android:paddingRight="32dp"
+                android:textStyle="bold"
+                android:textSize="22sp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Chọn tỉnh thành"/>
+            <TextView
+                android:textColor="#ffffff"
+                android:paddingLeft="30dp"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Xong"/>
+
+    </LinearLayout>
+    <SearchView
+        android:id="@+id/search_city_id"
+        android:layout_width="380dp"
+        android:layout_height="50dp"
+        android:layout_marginVertical="20dp"
+        android:layout_marginLeft="15dp"
+        android:background="@drawable/edit_round_city"
+        android:iconifiedByDefault="false"
+        android:queryHint="Tìm tỉnh thành">
+    </SearchView>
+    <ListView
+        android:id="@+id/listView_city"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/search"
+        />
+</LinearLayout>
