@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Foody_08</string>
+    <string name="app_name">Foody</string>
+    <string name="map_api_key">AIzaSyBosO6DXw1ldmgVbkY9cmp2Ujuko7GKhNs</string>
 </resources>

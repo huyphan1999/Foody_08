@@ -86,7 +86,7 @@ public class FoodyDatabase extends SQLiteOpenHelper {
                 restaurant.setDescription(cursor.getString(3));
                 restaurant.setAddress(cursor.getString(4));
                 restaurant.setThumbnail(cursor.getInt(5));
-                // Adding note to list
+                // Adding restaurant to list
                 resList.add(restaurant);
             } while (cursor.moveToNext());
         }
