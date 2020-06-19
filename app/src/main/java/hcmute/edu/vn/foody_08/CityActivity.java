@@ -1,36 +1,32 @@
 package hcmute.edu.vn.foody_08;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.SearchView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 
-public class CityActivity extends AppCompatActivity  implements SearchView.OnQueryTextListener {
+public class CityActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
     String[] provinceNameList;
-    private ListView lv;
+    private ListView listView;
     ListViewAdapter adapter;
-    private ArrayList<ProvinceName> arrayList= new ArrayList<ProvinceName>();
+    private ArrayList<Province> arrayListProvince = new ArrayList<Province>();
+    FoodyDatabase db = new FoodyDatabase(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_city);
-        provinceNameList= new String[]{"Đồng Nai","Hồ Chí Minh","Vũng Tàu","Bình Dương","Hà Nội","Đà Nẵng"};
-        // Locate the ListView in listview_main.xml
-        lv =  findViewById(R.id.listView_city);
-        for (int i = 0; i < provinceNameList.length; i++) {
-            ProvinceName provinceNames = new ProvinceName(provinceNameList[i]);
-            // Binds all strings into an array
-            arrayList.add(provinceNames);
-        }
+
+        listView = findViewById(R.id.listView_city);
+        arrayListProvince = db.getAllPronvinces();
         // Pass results to ListViewAdapter Class
-        adapter = new ListViewAdapter(this, arrayList);
+        adapter = new ListViewAdapter(this, arrayListProvince);
 
         // Binds the Adapter to the ListView
-        lv.setAdapter(adapter);
+        listView.setAdapter(adapter);
 
     }
     @Override

@@ -1,10 +1,10 @@
 package hcmute.edu.vn.foody_08;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
 
 import java.util.List;
 
@@ -17,8 +17,8 @@ public class FindActivity extends AppCompatActivity {
         setContentView(R.layout.activity_find);
         FoodyDatabase db=new FoodyDatabase(this);
 
-        RecyclerView myrv=(RecyclerView) findViewById(R.id.reclycleView_id);
-        RecycleViewAdapter myAdapter= new RecycleViewAdapter(this,db.getAllRestaurants());
+        RecyclerView myrv = (RecyclerView) findViewById(R.id.reclycleView_id);
+        RecycleViewAdapter myAdapter = new RecycleViewAdapter(this, db.getAllRestaurants(217));
         myrv.setLayoutManager(new GridLayoutManager(this,1));
         myrv.setAdapter(myAdapter);
     }

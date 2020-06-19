@@ -1,14 +1,16 @@
 package hcmute.edu.vn.foody_08;
-import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
+
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -37,7 +39,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         holder.tv_diachi.setText(mData.get(position).getAddress());
         holder.tv_khoangcach.setText("10km");
         holder.tv_theloai.setText(mData.get(position).getCategory());
-        holder.img_thumbnail.setImageResource(mData.get(position).getThumbnail());
+        Picasso.get().load(mData.get(position).getThumbnail()).into(holder.img_thumbnail);
     }
     /*@Override
     public void onBindViewHolder(@NonNull RecycleViewAdapter.MyViewHolder holder, final int position) {

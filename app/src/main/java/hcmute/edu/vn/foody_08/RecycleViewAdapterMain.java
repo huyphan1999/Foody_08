@@ -1,7 +1,5 @@
 package hcmute.edu.vn.foody_08;
-import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -9,6 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -34,7 +38,11 @@ public class RecycleViewAdapterMain extends RecyclerView.Adapter<RecycleViewAdap
 
     public void onBindViewHolder(@NonNull RecycleViewAdapterMain.MyViewHolder holder, final int position) {
         holder.tv_book_title.setText(mData.get(position).getName());
-        holder.img_book_thumbnail.setImageResource(mData.get(position).getThumbnail());
+        Picasso.get()
+                .load(mData.get(position).getThumbnail())
+                .placeholder(R.drawable.loading)
+                .error(R.drawable.error)
+                .into(holder.img_book_thumbnail);
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

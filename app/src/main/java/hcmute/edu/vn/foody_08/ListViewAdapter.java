@@ -16,14 +16,14 @@ public class ListViewAdapter extends BaseAdapter {
 
     Context mContext;
     LayoutInflater inflater;
-    private List<ProvinceName> provinceNamesList = null;
-    private ArrayList<ProvinceName> arraylist;
+    private List<Province> provinceNamesList = null;
+    private ArrayList<Province> arraylist;
 
-    public ListViewAdapter(Context context, List<ProvinceName> provinceNamesList) {
+    public ListViewAdapter(Context context, List<Province> provinceNamesList) {
         mContext = context;
         this.provinceNamesList = provinceNamesList;
         inflater = LayoutInflater.from(mContext);
-        this.arraylist = new ArrayList<ProvinceName>();
+        this.arraylist = new ArrayList<Province>();
         this.arraylist.addAll(provinceNamesList);
     }
 
@@ -37,7 +37,7 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     @Override
-    public ProvinceName getItem(int position) {
+    public Province getItem(int position) {
         return provinceNamesList.get(position);
     }
 
@@ -58,7 +58,7 @@ public class ListViewAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
         // Set the results into TextViews
-        holder.name.setText(provinceNamesList.get(position).getProvinceName());
+        holder.name.setText(provinceNamesList.get(position).getName());
         return view;
     }
 
@@ -71,9 +71,9 @@ public class ListViewAdapter extends BaseAdapter {
             provinceNamesList.addAll(arraylist);
         }
         else {
-            for (ProvinceName provinceName : arraylist){
-                if (provinceName.getProvinceName().toLowerCase(Locale.getDefault())
-                        .contains(charText)){
+            for (Province provinceName : arraylist) {
+                if (provinceName.getName().toLowerCase(Locale.getDefault())
+                        .contains(charText)) {
                     provinceNamesList.add(provinceName);
                 }
             }
