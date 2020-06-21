@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,12 +7,25 @@
     android:gravity="center"
     android:background="#e6e6e6"
     tools:context=".LoginWifiActivity">
+
+    <TextView
+
+        android:layout_marginBottom="20dp"
+        android:layout_width="390dp"
+        android:layout_height="wrap_content"
+        android:text="Nhap WiFi"
+        android:textSize="20sp"
+        android:textStyle="bold"
+
+        android:layout_above="@id/edtNameWifi"
+        android:gravity="center_horizontal" />
+
     <EditText
         android:drawableLeft="@drawable/wifi"
         android:id="@+id/edtNameWifi"
-        android:layout_width="320dp"
+        android:layout_width="390dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/edit_round_connect_wifi"
+        android:background="@drawable/edit_wifi_corner"
         android:textSize="18sp"
         android:padding="8dp"
         android:drawablePadding="8dp"
@@ -23,9 +35,9 @@
         android:drawablePadding="8dp"
         android:layout_marginTop="20dp"
         android:id="@+id/edtPassWifi"
-        android:layout_width="320dp"
+        android:layout_width="390dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/edit_round_connect_wifi"
+        android:background="@drawable/edit_wifi_corner"
         android:textSize="18sp"
         android:padding="8dp"
         android:drawableLeft="@drawable/password"
@@ -35,17 +47,15 @@
 
         />
     <Button
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         android:id="@+id/btnSubWifi"
-        android:layout_width="320dp"
+        android:layout_width="390dp"
         android:backgroundTint="#3366ff"
         android:layout_height="wrap_content"
-        android:background="@drawable/edit_round_connect_wifi"
+        android:background="@drawable/edit_wifi_corner"
         android:textSize="18sp"
         android:padding="8dp"
         android:hint="Cập Nhật Wifi Password"
         android:layout_below="@id/edtPassWifi"
-
         />
-
 </RelativeLayout>
