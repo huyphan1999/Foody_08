@@ -2,10 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/myLinearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/myLinearLayout"
-    android:clickable="true"
+    android:clickable="false"
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -63,22 +63,24 @@
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/txtNameRes"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#F1F1F1"
-        android:orientation="vertical"
-        android:paddingTop="9dp">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:background="#E3E1E1"
+        android:gravity="center|center_vertical"
+        android:padding="8dp"
+        android:text="Bún Đậu Cô Giang"
+        android:textColor="#A9322E"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/txtRes_id"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Bún Đậu Cô Giang"
-            android:textColor="#A9322E"
-            android:textStyle="bold"
-            android:layout_gravity="center_horizontal" />
-    </LinearLayout>
+    <ExpandableListView
+        android:id="@+id/expandableListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:indicatorLeft="?android:attr/expandableListPreferredChildIndicatorLeft" />
 
     <FrameLayout
         android:id="@+id/container_body"

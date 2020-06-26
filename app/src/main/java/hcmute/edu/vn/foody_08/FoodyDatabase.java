@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class FoodyDatabase extends SQLiteOpenHelper {
@@ -24,11 +25,12 @@ public class FoodyDatabase extends SQLiteOpenHelper {
     private Context context;
 
     // Database Version
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION =1;
 
     // Database Name
     private static final String DATABASE_NAME = "FoodyApplication";
 
+    //Bảng quán ăn
     //Table Restaurents
     private static final String TABLE_RESTAURANT = "Restaurants";
 
@@ -43,13 +45,32 @@ public class FoodyDatabase extends SQLiteOpenHelper {
     private static final String COLUMN_RESTAURANT_CityId = "CityId";
     private static final String COLUMN_RESTAURANT_Wifi = "Wifi";
     private static final String COLUMN_RESTAURANT_Password = "Password";
+    private static final String COLUMN_RESTAURANT_MinPrice = "MinPrice";
+    private static final String COLUMN_RESTAURANT_MaxPrice = "MaxPrice";
 
+    //Bảng các tỉnh thành
     //Table Provinces
     private static final String TABLE_PROVINCES = "Provinces";
 
     private static final String COLUMN_PROVINCES_Id = "Id";
     private static final String COLUMN_PROVINCES_Name = "Name";
 
+    //Bảng danh mục món
+    //Table DishType
+    private static final String TABLE_DISHTYPE = "DishType";
+
+    private static final String COLUMN_DISHTYPE_Id = "Id";
+    private static final String COLUMN_DISHTYPE_Name = "Name";
+    private static final String COLUMN_DISHTYPE_ResId = "ResId";
+
+    //Bảng món ăn
+    //Table Dishes
+    private static final String TABLE_DISH = "Dishes";
+
+    private static final String COLUMN_DISH_Id = "Id";
+    private static final String COLUMN_DISH_Name = "Name";
+    private static final String COLUMN_DISH_Price = "Price";
+    private static final String COLUMN_DISH_DishTypeId = "dishTypeId";
 
     public FoodyDatabase(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -59,7 +80,7 @@ public class FoodyDatabase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        //Script tạo bảng Restaurents
+        //Script create table Restaurents
         String scriptRestaurant = "CREATE TABLE " + TABLE_RESTAURANT + "("
                 + COLUMN_RESTAURANT_Id + " INTEGER PRIMARY KEY,"
                 + COLUMN_RESTAURANT_Name + " TEXT,"
@@ -71,18 +92,36 @@ public class FoodyDatabase extends SQLiteOpenHelper {
                 + COLUMN_RESTAURANT_Longitude + " REAL,"
                 + COLUMN_RESTAURANT_CityId + " INTEGER,"
                 + COLUMN_RESTAURANT_Wifi + " TEXT,"
-                + COLUMN_RESTAURANT_Password + " TEXT"
+                + COLUMN_RESTAURANT_Password + " TEXT,"
+                + COLUMN_RESTAURANT_MinPrice + " INTEGER,"
+                + COLUMN_RESTAURANT_MaxPrice + " INTEGER"
                 + ")";
 
-        // Script tạo bảng provinces
+        // Script create table Provinces
         String scriptProvince = "CREATE TABLE " + TABLE_PROVINCES + "("
                 + COLUMN_PROVINCES_Id + " INTEGER PRIMARY KEY,"
                 + COLUMN_PROVINCES_Name + " TEXT"
                 + ")";
 
+        // Script create table DishType
+        String scriptDishType = "CREATE TABLE " + TABLE_DISHTYPE + "("
+                + COLUMN_DISHTYPE_Id + " INTEGER PRIMARY KEY,"
+                + COLUMN_DISHTYPE_Name + " TEXT,"
+                + COLUMN_DISHTYPE_ResId + " INTEGER"
+                + ")";
+        // Script create table Dishes
+        String scriptDish = "CREATE TABLE " + TABLE_DISH + "("
+                + COLUMN_DISH_Id + " INTEGER PRIMARY KEY,"
+                + COLUMN_DISH_Name + " TEXT,"
+                + COLUMN_DISH_Price + " INTEGER,"
+                + COLUMN_DISH_DishTypeId + " INTEGER"
+                + ")";
+
         // Execute Script.
         db.execSQL(scriptProvince);
         db.execSQL(scriptRestaurant);
+        db.execSQL(scriptDishType);
+        db.execSQL(scriptDish);
     }
 
     @Override
@@ -90,6 +129,8 @@ public class FoodyDatabase extends SQLiteOpenHelper {
         //Xoá bảng cũ
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_RESTAURANT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_PROVINCES);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_DISH);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_DISHTYPE);
         //Tiến hành tạo bảng mới
         onCreate(db);
     }
@@ -113,6 +154,34 @@ public class FoodyDatabase extends SQLiteOpenHelper {
             }
         }
     }
+    public void addDishType(int dishTypeId,String disTypeName,int resId) {
+                SQLiteDatabase db = this.getWritableDatabase();
+
+                ContentValues values = new ContentValues();
+                values.put(COLUMN_DISHTYPE_Id, dishTypeId);
+                values.put(COLUMN_DISHTYPE_Name, disTypeName);
+                values.put(COLUMN_DISHTYPE_ResId,resId);
+
+                // Inserting Row
+                db.insert(TABLE_DISHTYPE, null, values);
+                // Closing database connection
+                db.close();
+    }
+
+    public void addDish(int dishId,String Name,int Price,int dishTypeId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_DISH_Id, dishId);
+        values.put(COLUMN_DISH_Name,Name);
+        values.put(COLUMN_DISH_Price,Price);
+        values.put(COLUMN_DISH_DishTypeId,dishTypeId);
+        // Inserting Row
+        db.insert(TABLE_DISH, null, values);
+        // Closing database connection
+        db.close();
+    }
+
 
     public String readJSONFromAsset(String fileName) {
         String json;
@@ -150,6 +219,8 @@ public class FoodyDatabase extends SQLiteOpenHelper {
         if (getResCount() == 0) {
             JSONArray resList = new JSONArray(readJSONFromAsset("restaurants.json"));
             for (int i = 0; i < resList.length(); ++i) {
+
+                //Truyền data chung của nhà hàng vào database
                 int id = resList.getJSONObject(i).getInt("Id");
                 String name = resList.getJSONObject(i).getString("name");
                 String address = resList.getJSONObject(i).getString("address");
@@ -159,12 +230,90 @@ public class FoodyDatabase extends SQLiteOpenHelper {
                 int CityId = resList.getJSONObject(i).getInt("CityId");
                 String Wifi = resList.getJSONObject(i).getString("Wifi");
                 String Password = resList.getJSONObject(i).getString("Password");
+                int MinPrice = resList.getJSONObject(i).getInt("Min_price");
+                int MaxPrice = resList.getJSONObject(i).getInt("Max_price");
+                String Category = resList.getJSONObject(i).getString("Category");
 
-                Restaurant restaurant = new Restaurant(id, name, address, Thumbnail, Latitude, Longitude, CityId, Wifi, Password);
+                Restaurant restaurant = new Restaurant(id,name,Category,address,Thumbnail,Latitude,Longitude,CityId,Wifi,Password,MinPrice,MaxPrice);
                 addRestaurant(restaurant);
+
+                //Lấy menu
+                JSONArray disTypeList= resList.getJSONObject(i).getJSONArray("Menu");
+                int disTypeListLength=disTypeList.length();
+                if (disTypeListLength!=0){
+                    for (int j = 0; j < disTypeListLength; ++j){
+
+                        //Lấy danh mục món ăn
+                        int dishTypeId = disTypeList.getJSONObject(j).getInt("dish_type_id");
+                        String disTypeName = disTypeList.getJSONObject(j).getString("dish_type_name");
+                        addDishType(dishTypeId,disTypeName,id);
+
+                        //Lấy món
+                        JSONArray dishes= disTypeList.getJSONObject(j).getJSONArray("dishes");
+                        int dishesLength=dishes.length();
+                        if(dishesLength!=0){
+                            for (int z = 0; z < dishesLength; ++z){
+                                int dishId = dishes.getJSONObject(z).getInt("id");
+                                String dishName=dishes.getJSONObject(z).getString("name");
+                                int price = dishes.getJSONObject(z).getInt("price");
+                                addDish(dishId,dishName,price,dishTypeId);
+                            }
+                        }
+
+                    }
+                }
             }
         }
 
+    }
+
+
+    public List<Dish> getDishes(int dishTypeId){
+        List<Dish> dishList = new ArrayList<>();
+        String selectQuery = "SELECT  * FROM " + TABLE_DISH + " WHERE " + COLUMN_DISH_DishTypeId + " = " + dishTypeId;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                Dish dish = new Dish();
+                dish.setName(cursor.getString(1));
+                dish.setPrice(cursor.getInt(2));
+                // Adding restaurant to list
+                dishList.add(dish);
+            } while (cursor.moveToNext());
+        }
+        return dishList;
+    }
+
+
+    public HashMap<String, List<Dish>> getMenu(int resId) {
+        Log.i(TAG, "MyDatabaseHelper.getAllNotes ... ");
+
+        HashMap<String,List<Dish>> menu = new HashMap<>();
+        //Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_DISHTYPE + " WHERE " + COLUMN_DISHTYPE_ResId + " = " + resId;
+
+//        String selectQuery = "SELECT  * FROM " + TABLE_RESTAURANT;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                int dishTypeId = cursor.getInt(0);
+                String dishTypeName = cursor.getString(1);
+
+                List<Dish> dishes = getDishes(dishTypeId);
+
+                menu.put(dishTypeName,dishes);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+
+        // return note list
+        return menu;
     }
 
     public List<Restaurant> getAllRestaurants(int cityId) {
@@ -193,6 +342,8 @@ public class FoodyDatabase extends SQLiteOpenHelper {
                 restaurant.setCityId(cursor.getInt(8));
                 restaurant.setWifi(cursor.getString(9));
                 restaurant.setPassword(cursor.getString(10));
+                restaurant.setMinPrice(cursor.getInt(11));
+                restaurant.setMaxPrice(cursor.getInt(12));
                 // Adding restaurant to list
                 resList.add(restaurant);
             } while (cursor.moveToNext());
@@ -244,6 +395,8 @@ public class FoodyDatabase extends SQLiteOpenHelper {
         values.put(COLUMN_RESTAURANT_CityId, restaurant.getCityId());
         values.put(COLUMN_RESTAURANT_Wifi, restaurant.getWifi());
         values.put(COLUMN_RESTAURANT_Password, restaurant.getPassword());
+        values.put(COLUMN_RESTAURANT_MinPrice,restaurant.getMinPrice());
+        values.put(COLUMN_RESTAURANT_MaxPrice,restaurant.getMaxPrice());
         // Inserting Row
         db.insert(TABLE_RESTAURANT, null, values);
 
@@ -251,6 +404,21 @@ public class FoodyDatabase extends SQLiteOpenHelper {
         db.close();
     }
 
+    public String getCityName(int cityId) {
+        Log.i(TAG, "MyDatabaseHelper.getNotesCount ... ");
+        String cityName = "";
+
+        String selectQuery = "SELECT  * FROM " + TABLE_PROVINCES + " WHERE " + COLUMN_PROVINCES_Id + " = " + cityId;
+//        String selectQuery = "SELECT  * FROM " + TABLE_RESTAURANT;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                cityName=cursor.getString(1);
+            } while (cursor.moveToNext());
+        }
+        return cityName;
+    }
 
     public int getResCount() {
         Log.i(TAG, "MyDatabaseHelper.getNotesCount ... ");

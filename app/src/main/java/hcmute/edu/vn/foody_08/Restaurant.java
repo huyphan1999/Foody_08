@@ -1,6 +1,8 @@
 package hcmute.edu.vn.foody_08;
 
-public class Restaurant {
+import java.io.Serializable;
+
+public class Restaurant implements Serializable {
 
 
     private int Id;
@@ -12,15 +14,21 @@ public class Restaurant {
     private double Latitude;
     private double Longitude;
     private int CityId;
+
+
+
     private String Wifi;
     private String Password;
+    private int MinPrice;
+    private int MaxPrice;
 
     public Restaurant() {
     }
 
-    public Restaurant(int id, String name, String address, String thumbnail, double latitude, double longitude, int cityId, String wifi, String password) {
+    public Restaurant(int id, String name, String category, String address, String thumbnail, double latitude, double longitude, int cityId, String wifi, String password, int minPrice, int maxPrice) {
         Id = id;
         Name = name;
+        Category = category;
         Address = address;
         Thumbnail = thumbnail;
         Latitude = latitude;
@@ -28,6 +36,24 @@ public class Restaurant {
         CityId = cityId;
         Wifi = wifi;
         Password = password;
+        MinPrice = minPrice;
+        MaxPrice = maxPrice;
+    }
+
+    public int getMinPrice() {
+        return MinPrice;
+    }
+
+    public void setMinPrice(int minPrice) {
+        MinPrice = minPrice;
+    }
+
+    public int getMaxPrice() {
+        return MaxPrice;
+    }
+
+    public void setMaxPrice(int maxPrice) {
+        MaxPrice = maxPrice;
     }
 
     public int getId() {

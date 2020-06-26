@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class RecycleViewAdapterMain extends RecyclerView.Adapter<RecycleViewAdapterMain.MyViewHolder> {
@@ -48,13 +49,13 @@ public class RecycleViewAdapterMain extends RecyclerView.Adapter<RecycleViewAdap
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, RestaurantActivity.class);
                 //passing data to the book activity
-                intent.putExtra("RestaurantName", mData.get(position).getName());
-                intent.putExtra("Description", mData.get(position).getDescription());
-                intent.putExtra("Thumbnail", mData.get(position).getThumbnail());
+                intent.putExtra("Restaurant", mData.get(position));
                 //start the activity
                 mContext.startActivity(intent);
             }
         });
+
+        holder.cardView.setCardElevation(0);
 
     }
 

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp">
+
+
+
+    <TextView
+        android:id="@+id/expandedListItem"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:paddingLeft="15dp"
+        android:paddingTop="5dp"
+        android:textFontWeight="600"
+        android:textColor="@android:color/primary_text_light"
+        android:text="Bò Mỹ nhúng ớt nhỏ" />
+
+    <TextView
+        android:id="@+id/expandedListItemPrice"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:textFontWeight="800"
+        android:paddingTop="3dp"
+        android:paddingBottom="10dp"
+        android:text="15000 đ"
+        android:textColor="#163CAC" />
+</LinearLayout>
