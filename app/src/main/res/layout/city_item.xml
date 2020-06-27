@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
+    android:padding="10dp"
     android:weightSum="10">
 
     <ImageView
@@ -19,8 +20,9 @@
         android:layout_width="match_parent"
         android:layout_height="32dp"
         android:layout_weight="9"
+        android:text="TP.HCM"
         android:gravity="center_vertical"
         android:paddingLeft="5dp"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textStyle="bold" />
 </LinearLayout>

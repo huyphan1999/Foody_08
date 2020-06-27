@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,7 +11,7 @@
         android:id="@+id/layout_timkiem"
         android:layout_width="match_parent"
         android:background="#f4061c"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -26,21 +25,22 @@
             android:layout_width="wrap_content"
             android:background="#f4061c"
             android:layout_height="70dp">
+
             <SearchView
-                android:layout_width="250dp"
+                android:layout_width="300dp"
                 android:layout_height="35dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/button_search"
                 android:drawableLeft="@drawable/kinhlup"
                 android:drawablePadding="10dp"
-                android:paddingLeft="10dp"
+                android:paddingLeft="0dp"
+                android:paddingRight="25dp"
                 android:text="Bún"
                 android:iconifiedByDefault="false"
                 android:textSize="15dp"
                 android:id="@+id/txtTimKiem"
-                android:textStyle="bold">
-            </SearchView>
+                android:textStyle="bold"></SearchView>
             <Button
                 android:layout_width="wrap_content"
                 style="?android:attr/borderlessButtonStyle"
@@ -48,22 +48,23 @@
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="20dp"
                 android:textStyle="bold"
-                android:maxLines="2"
                 android:paddingLeft="0dp"
+                android:paddingRight="3dp"
                 android:textAlignment="center"
-                android:text="TP. Nha Trang"
+                android:text="Bình Dương"
                 android:id="@+id/btn_city"
                 android:background="@drawable/button_round"
                 android:layout_toRightOf="@id/txtTimKiem"
                 />
+
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_marginTop="20dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
                 android:textAlignment="center"
                 android:textSize="16sp"
                 android:gravity="center_vertical"
-                android:layout_marginRight="-5dp"
+                android:layout_marginRight="3dp"
                 android:id="@+id/txt_address"
                 android:text="ở"
                 android:background="@drawable/button_round"
@@ -71,10 +72,10 @@
                 tools:ignore="RtlCompat" />
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="35dp"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="3dp"
                 android:gravity="center_vertical"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="27dp"
                 android:textStyle="bold"
                 android:hint="Địa Điểm"
                 android:textColorHint="#2d2d2d"

@@ -3,6 +3,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardViewItem"
     android:gravity="center"
     cardview:cardCornerRadius="0dp">
 

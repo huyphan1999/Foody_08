@@ -1,13 +1,16 @@
 package hcmute.edu.vn.foody_08;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -34,12 +37,34 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         holder.tv_tenquan.setText(mData.get(position).getName());
         holder.tv_diachi.setText(mData.get(position).getAddress());
-        holder.tv_khoangcach.setText("10km");
+
+        double latitude = mData.get(position).getLatitude();
+        double longitude = mData.get(position).getLongitude();
+        String distance = Distance.getDistance(latitude, longitude);
+        if (distance == null) {
+            distance = "0km";
+            Toast.makeText(mContext, "Không thể lấy được vị trí của bạn vui lòng thử lại", Toast.LENGTH_LONG).show();
+        }
+        holder.tv_khoangcach.setText(distance);
         holder.tv_theloai.setText(mData.get(position).getCategory());
-        Picasso.get().load(mData.get(position).getThumbnail()).into(holder.img_thumbnail);
+        Picasso.get()
+                .load(mData.get(position).getThumbnail())
+                .placeholder(R.drawable.loading)
+                .error(R.drawable.error)
+                .into(holder.img_thumbnail);
+
+        holder.cardViewItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, RestaurantActivity.class);
+                intent.putExtra("Restaurant", mData.get(position));
+                //start the activity
+                mContext.startActivity(intent);
+            }
+        });
     }
     /*@Override
     public void onBindViewHolder(@NonNull RecycleViewAdapter.MyViewHolder holder, final int position) {
@@ -85,14 +110,16 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         TextView tv_diachi;
         TextView tv_khoangcach;
         TextView tv_theloai;
-        ImageView img_thumbnail;
+       ImageView img_thumbnail;
+       CardView cardViewItem;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            tv_tenquan=(TextView) itemView.findViewById(R.id.txtTenQuan);
-            tv_diachi=(TextView) itemView.findViewById(R.id.txtDiaChi);
-            tv_khoangcach=(TextView) itemView.findViewById(R.id.txtKhoangCach);
-            tv_theloai=(TextView) itemView.findViewById(R.id.txtTheLoai);
-            img_thumbnail=(ImageView) itemView.findViewById(R.id.thumbnail);
+            tv_tenquan = itemView.findViewById(R.id.txtTenQuan);
+            tv_diachi = itemView.findViewById(R.id.txtDiaChi);
+            tv_khoangcach = itemView.findViewById(R.id.txtKhoangCach);
+            tv_theloai = itemView.findViewById(R.id.txtTheLoai);
+            img_thumbnail = itemView.findViewById(R.id.thumbnail);
+            cardViewItem = itemView.findViewById(R.id.cardViewItem);
         }
     }
 }

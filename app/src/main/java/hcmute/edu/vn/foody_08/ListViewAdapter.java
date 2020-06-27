@@ -6,34 +6,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 public class ListViewAdapter extends BaseAdapter {
 
-    ArrayList<String> result;
+    ArrayList<Province> result;
     Context mcontext;
     int imageId;
-    String tinh;
-    EditText editText1;
+    int cityId;
 
 
-    public ListViewAdapter(Context context, ArrayList<String> result, int imageId, String tinh, EditText editText1) {
+    public ListViewAdapter(Context context, ArrayList<Province> result, int imageId, int cityId) {
         this.mcontext = context;
         this.result = result;
         this.imageId = imageId;
-        this.tinh = tinh;
-        editText1 = editText1;
+        this.cityId = cityId;
     }
 
-    public class ViewHolder {
-        TextView name;
-    }
 
     @Override
     public int getCount() {
@@ -51,20 +43,20 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     public View getView(final int position, View view, ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater) mcontext.getSystemService(mcontext.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) mcontext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view_row = inflater.inflate(R.layout.city_item, parent, false);
 
-        final TextView tv_Content = (TextView) view_row.findViewById(R.id.tvNoiDung);
-        final ImageView ic_tick = (ImageView) view_row.findViewById(R.id.imgCheck);
+        final TextView tv_Content = view_row.findViewById(R.id.tvNoiDung);
+        final ImageView ic_tick = view_row.findViewById(R.id.imgCheck);
 
 
-        if (result.get(position).equals(tinh)) {
-            tv_Content.setText(result.get(position));
+        if (result.get(position).getId() == cityId) {
+            tv_Content.setText(result.get(position).getName());
             tv_Content.setTextColor(0xFF03A9F4);
             ic_tick.setImageResource(imageId);
             //Picasso.with(context).load(imageId).into(imgAvatar);
         } else {
-            tv_Content.setText(result.get(position));
+            tv_Content.setText(result.get(position).getName());
             tv_Content.setTextColor(Color.BLACK);
         }
         return view_row;
