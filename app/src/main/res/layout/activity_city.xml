@@ -13,6 +13,7 @@
         android:paddingTop="15dp"
         >
             <TextView
+                android:id="@+id/txtHuy"
                 android:textColor="#ffffff"
                 android:paddingRight="30dp"
                 android:textSize="20sp"
@@ -29,6 +30,7 @@
                 android:layout_height="match_parent"
                 android:text="Chọn tỉnh thành"/>
             <TextView
+                android:id="@+id/txtXong"
                 android:textColor="#ffffff"
                 android:paddingLeft="30dp"
                 android:textSize="20sp"
@@ -37,7 +39,8 @@
                 android:text="Xong"/>
 
     </LinearLayout>
-    <SearchView
+
+    <EditText
         android:id="@+id/search_city_id"
         android:layout_width="380dp"
         android:layout_height="50dp"
@@ -45,8 +48,7 @@
         android:layout_marginLeft="15dp"
         android:background="@drawable/edit_round_city"
         android:iconifiedByDefault="false"
-        android:queryHint="Tìm tỉnh thành">
-    </SearchView>
+        android:queryHint="Tìm tỉnh thành"></EditText>
     <ListView
         android:id="@+id/listView_city"
         android:layout_width="fill_parent"
