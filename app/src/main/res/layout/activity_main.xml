@@ -27,7 +27,7 @@
 
         </SearchView>
 
-        <Button
+        <TextView
             android:layout_marginRight="15dp"
             android:id="@+id/btn_City"
             android:layout_width="wrap_content"
