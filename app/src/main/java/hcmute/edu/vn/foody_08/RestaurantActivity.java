@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
 
@@ -75,11 +76,15 @@ public class RestaurantActivity extends FragmentActivity {
         txtTinh.setText(db.getCityName(res.getCityId()));
         txtDiaChi.setText(res.getAddress());
         txtLoaiHinh.setText(res.getCategory());
-        String priceRange=df.format(res.getMinPrice())+"đ - "+df.format(res.getMaxPrice())+"đ";
+        String priceRange = df.format(res.getMinPrice()) + "đ - " + df.format(res.getMaxPrice()) + "đ";
         txtGia.setText(priceRange);
-        String distance= Distance.getDistance(res.getLatitude(),res.getLongitude());
+        String distance = Distance.getDistance(res.getLatitude(), res.getLongitude());
+        if (distance == null) {
+            distance = "Không thể xác định";
+            Toast.makeText(this, "Không thể lấy được vị trí của bạn vui lòng thử lại", Toast.LENGTH_LONG).show();
+        }
         txtDistance.setText(distance);
-        if(res.getWifi()!=""){
+        if (res.getWifi() != "") {
             txtWifi.setText(res.getWifi());
         }
     }

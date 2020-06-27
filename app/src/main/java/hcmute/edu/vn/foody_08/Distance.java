@@ -13,11 +13,14 @@ public class Distance {
 
 
     public static String getDistance(double latitude, double longitude){
-        Location resLocation = new Location("");
-        resLocation.setLatitude(latitude);
-        resLocation.setLongitude(longitude);
-        float distance = myLocation.distanceTo(resLocation);
-        return df.format(distance/1000)+"km";
+        if (myLocation == null) return null;
+        else {
+            Location resLocation = new Location("");
+            resLocation.setLatitude(latitude);
+            resLocation.setLongitude(longitude);
+            float distance = myLocation.distanceTo(resLocation);
+            return df.format(distance / 1000) + "km";
+        }
     }
 
     public static void setMyLocation(Location myLocation) {

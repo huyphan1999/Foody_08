@@ -1,7 +1,6 @@
 package hcmute.edu.vn.foody_08;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -129,9 +128,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             finish();
         }
-        else{
-            getLocation();
-        }
+        getLocation();
     }
 
 
