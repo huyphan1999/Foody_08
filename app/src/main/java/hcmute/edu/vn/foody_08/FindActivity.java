@@ -6,7 +6,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -36,11 +38,21 @@ public class FindActivity extends Activity implements SearchView.OnQueryTextList
     String query;
     SearchView searchView;
     Button provinceButton;
+    ImageView btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find);
+        btnBack=findViewById(R.id.imgbutton_back_find);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                onBackPressed();
+                Toast.makeText(getApplicationContext(), "Go to Menu Main", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         Intent intent = getIntent();

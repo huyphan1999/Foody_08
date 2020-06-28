@@ -62,9 +62,9 @@ public class RestaurantActivity extends FragmentActivity {
         imgBtnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RestaurantActivity.this, MainActivity.class);
-                //start the activity
-                startActivity(intent);
+                finish();
+                onBackPressed();
+                Toast.makeText(getApplicationContext(), "Go to Menu Main", Toast.LENGTH_SHORT).show();
             }
         });
     }
