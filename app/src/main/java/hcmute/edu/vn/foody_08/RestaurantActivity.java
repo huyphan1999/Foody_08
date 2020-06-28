@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +27,7 @@ public class RestaurantActivity extends FragmentActivity {
     TextView txtDistance;
     LinearLayout layoutMenu;
     Restaurant restaurant;
+    ImageView imageView;
     FoodyDatabase db = new FoodyDatabase(this);
 
     @Override
@@ -34,7 +36,7 @@ public class RestaurantActivity extends FragmentActivity {
         setContentView(R.layout.activity_restaurent);
 
         addControl();
-
+        imageView = (ImageView) findViewById(R.id.imgbutton_back);
         Intent intent=getIntent();
         restaurant = (Restaurant) intent.getSerializableExtra("Restaurant");
 
@@ -45,9 +47,15 @@ public class RestaurantActivity extends FragmentActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(RestaurantActivity.this, Menu_Restaurant.class);
                 //passing data to the book activity
-                intent.putExtra("Restaurant",restaurant);
+                intent.putExtra("Restaurant", restaurant);
                 //start the activity
                 startActivity(intent);
+            }
+        });
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
         txtAddWifi.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +77,7 @@ public class RestaurantActivity extends FragmentActivity {
         txtGia=findViewById(R.id.txtGia);
         txtDistance=findViewById(R.id.txtKhoangCach);
     }
+
 
     protected void setTextData(Restaurant res) {
         DecimalFormat df = new DecimalFormat("#,###,###");

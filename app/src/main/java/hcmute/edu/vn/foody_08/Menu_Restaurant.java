@@ -3,8 +3,10 @@ package hcmute.edu.vn.foody_08;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,23 +23,28 @@ public class Menu_Restaurant extends AppCompatActivity {
     HashMap<String,List<Dish>> menu=new HashMap<>();
     TextView txtNameRes;
     Restaurant restaurant;
-
-    FoodyDatabase db=new FoodyDatabase(this);
+    ImageView image1;
+    FoodyDatabase db = new FoodyDatabase(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu__restaurant);
-
+        image1 = (ImageView) findViewById(R.id.imgbutton_back);
         addControl();
 
-        Intent intent=getIntent();
+        Intent intent = getIntent();
         restaurant = (Restaurant) intent.getSerializableExtra("Restaurant");
 
         setTextData(restaurant);
 
         displayMenu(restaurant);
-
+        image1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
     }
