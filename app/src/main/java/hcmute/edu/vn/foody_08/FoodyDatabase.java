@@ -443,4 +443,14 @@ public class FoodyDatabase extends SQLiteOpenHelper {
         // return count
         return count;
     }
+
+    public Cursor GetData(String sql) {
+        SQLiteDatabase database = getReadableDatabase();
+        return database.rawQuery(sql, null);
+    }
+
+    public void QueryData(String sql) {
+        SQLiteDatabase database = getWritableDatabase();
+        database.execSQL(sql);
+    }
 }

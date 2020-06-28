@@ -7,11 +7,13 @@ import android.widget.SearchView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CityActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
     String[] provinceNameList;
     private ListView listView;
     ListViewAdapter adapter;
+
     private ArrayList<Province> arrayListProvince = new ArrayList<Province>();
     FoodyDatabase db = new FoodyDatabase(this);
 
