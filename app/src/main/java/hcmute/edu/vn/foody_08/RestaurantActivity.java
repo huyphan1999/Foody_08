@@ -2,10 +2,12 @@ package hcmute.edu.vn.foody_08;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +28,7 @@ public class RestaurantActivity extends FragmentActivity {
     TextView txtDistance;
     LinearLayout layoutMenu;
     Restaurant restaurant;
+    ImageView imgBtnBack;
     FoodyDatabase db = new FoodyDatabase(this);
 
     @Override
@@ -56,6 +59,14 @@ public class RestaurantActivity extends FragmentActivity {
                 DialogLogin();
             }
         });
+        imgBtnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RestaurantActivity.this, MainActivity.class);
+                //start the activity
+                startActivity(intent);
+            }
+        });
     }
 
     protected void addControl() {
@@ -68,6 +79,7 @@ public class RestaurantActivity extends FragmentActivity {
         layoutMenu=findViewById(R.id.layoutMenu);
         txtGia=findViewById(R.id.txtGia);
         txtDistance=findViewById(R.id.txtKhoangCach);
+        imgBtnBack=findViewById(R.id.imgbutton_back);
     }
 
     protected void setTextData(Restaurant res) {

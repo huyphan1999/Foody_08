@@ -3,9 +3,13 @@ package hcmute.edu.vn.foody_08;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,6 +25,7 @@ public class Menu_Restaurant extends AppCompatActivity {
     HashMap<String,List<Dish>> menu=new HashMap<>();
     TextView txtNameRes;
     Restaurant restaurant;
+    ImageView imgBtnBack;
 
     FoodyDatabase db=new FoodyDatabase(this);
 
@@ -37,6 +42,17 @@ public class Menu_Restaurant extends AppCompatActivity {
         setTextData(restaurant);
 
         displayMenu(restaurant);
+        imgBtnBack=findViewById(R.id.imgbutton_back2);
+        imgBtnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                onBackPressed();
+                Toast.makeText(getApplicationContext(), "Go to Menu Restaurant", Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
 
 
 
