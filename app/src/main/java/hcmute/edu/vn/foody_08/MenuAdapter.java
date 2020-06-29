@@ -1,5 +1,6 @@
 package hcmute.edu.vn.foody_08;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -54,6 +55,7 @@ public class MenuAdapter extends BaseExpandableListAdapter {
         return fname;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View getChildView(int listPosition, final int expandedListPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
@@ -73,7 +75,7 @@ public class MenuAdapter extends BaseExpandableListAdapter {
                 .findViewById(R.id.expandedListItemPrice);
 
         expandedListTextView.setText(expandedListText);
-        expandedListTextViewPrice.setText(String.valueOf(df.format(price))+" đ");
+        expandedListTextViewPrice.setText(df.format(price) + " đ");
         return convertView;
     }
 

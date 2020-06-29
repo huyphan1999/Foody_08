@@ -2,7 +2,6 @@ package hcmute.edu.vn.foody_08;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -45,7 +44,6 @@ public class RestaurantActivity extends FragmentActivity {
         final int check = restaurant.getId();
         setTextData(restaurant);
         db.GetData("SELECT * FROM Restaurants WHERE Restaurants.Id = " + check);
-        int hkt = check;
         layoutMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,6 +89,7 @@ public class RestaurantActivity extends FragmentActivity {
                         db.QueryData("UPDATE Restaurants SET Wifi = '" + edt_wifi.getText() + "', Password = '" + edt_pass.getText() +
                                 "' WHERE Id = " + check);
                         dialog.dismiss();
+                        txtWifi.setText(edt_wifi.getText());
                     }
                 });
             }
@@ -128,22 +127,4 @@ public class RestaurantActivity extends FragmentActivity {
         }
     }
 
-
-
-    private void DialogLogin() {
-        final Dialog dialog = new Dialog(this, R.style.Theme_AppCompat_DayNight_DarkActionBar);
-        dialog.setContentView(R.layout.activity_login_wifi);
-        dialog.show();
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int displayWidth = displayMetrics.widthPixels;
-        int displayHeight = displayMetrics.heightPixels;
-        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
-        layoutParams.copyFrom(dialog.getWindow().getAttributes());
-        int dialogWindowWidth = (int) (displayWidth * 0.9f);
-        int dialogWindowHeight = (int) (displayHeight * 0.35f);
-        layoutParams.width = dialogWindowWidth;
-        layoutParams.height = dialogWindowHeight;
-        dialog.getWindow().setAttributes(layoutParams);
-    }
 }
