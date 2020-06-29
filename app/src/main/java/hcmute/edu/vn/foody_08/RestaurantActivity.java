@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ public class RestaurantActivity extends FragmentActivity {
     TextView txtDistance;
     LinearLayout layoutMenu;
     Restaurant restaurant;
+    ImageView imageView;
     FoodyDatabase db = new FoodyDatabase(this);
 
     @Override
@@ -37,7 +39,7 @@ public class RestaurantActivity extends FragmentActivity {
         setContentView(R.layout.activity_restaurent);
 
         addControl();
-
+        imageView = (ImageView) findViewById(R.id.imgbutton_back);
         Intent intent = getIntent();
         restaurant = (Restaurant) intent.getSerializableExtra("Restaurant");
         final int check = restaurant.getId();
@@ -49,9 +51,15 @@ public class RestaurantActivity extends FragmentActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(RestaurantActivity.this, Menu_Restaurant.class);
                 //passing data to the book activity
-                intent.putExtra("Restaurant", restaurant);
+                intent.putExtra("Restaurant",restaurant);
                 //start the activity
                 startActivity(intent);
+            }
+        });
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
         txtAddWifi.setOnClickListener(new View.OnClickListener() {

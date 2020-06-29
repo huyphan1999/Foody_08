@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.SearchView;
 
 import androidx.annotation.Nullable;
@@ -36,7 +37,7 @@ public class FindActivity extends Activity implements SearchView.OnQueryTextList
     String query;
     SearchView searchView;
     Button provinceButton;
-
+    ImageView imageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +55,13 @@ public class FindActivity extends Activity implements SearchView.OnQueryTextList
         setListRestaurant();
 
         setEvent();
+        imageView = (ImageView) findViewById(R.id.imgbutton_back);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     public void setTextData() {
