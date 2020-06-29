@@ -2,10 +2,13 @@ package hcmute.edu.vn.foody_08;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,17 +38,18 @@ public class RestaurantActivity extends FragmentActivity {
 
         addControl();
 
-        Intent intent=getIntent();
+        Intent intent = getIntent();
         restaurant = (Restaurant) intent.getSerializableExtra("Restaurant");
-
+        final int check = restaurant.getId();
         setTextData(restaurant);
-
+        db.GetData("SELECT * FROM Restaurants WHERE Restaurants.Id = " + check);
+        int hkt = check;
         layoutMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(RestaurantActivity.this, Menu_Restaurant.class);
                 //passing data to the book activity
-                intent.putExtra("Restaurant",restaurant);
+                intent.putExtra("Restaurant", restaurant);
                 //start the activity
                 startActivity(intent);
             }
@@ -53,7 +57,34 @@ public class RestaurantActivity extends FragmentActivity {
         txtAddWifi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogLogin();
+
+                final Dialog dialog = new Dialog(RestaurantActivity.this, R.style.Theme_AppCompat_DayNight_DarkActionBar);
+                dialog.setContentView(R.layout.activity_login_wifi);
+                final EditText edt_wifi = (EditText) dialog.findViewById(R.id.edtNameWifi);
+                final EditText edt_pass = (EditText) dialog.findViewById(R.id.edtPassWifi);
+                Button btnSubmit = (Button) dialog.findViewById(R.id.btnSubWifi);
+                dialog.show();
+                DisplayMetrics displayMetrics = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                int displayWidth = displayMetrics.widthPixels;
+                int displayHeight = displayMetrics.heightPixels;
+                WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+                layoutParams.copyFrom(dialog.getWindow().getAttributes());
+                int dialogWindowWidth = (int) (displayWidth * 0.9f);
+                int dialogWindowHeight = (int) (displayHeight * 0.35f);
+                layoutParams.width = dialogWindowWidth;
+                layoutParams.height = dialogWindowHeight;
+                dialog.getWindow().setAttributes(layoutParams);
+
+                btnSubmit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        db.QueryData("UPDATE Restaurants SET Wifi = '" + edt_wifi.getText() + "', Password = '" + edt_pass.getText() +
+                                "' WHERE Id = " + check);
+                        dialog.dismiss();
+                    }
+                });
             }
         });
     }
